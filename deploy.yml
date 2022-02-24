@@ -5,7 +5,7 @@ metadata:
   name: guestbook
   namespace: argocd
 spec:
-  project: default
+  project: default-1
   source:
     repoURL: https://github.com/argoproj/argocd-example-apps.git
     targetRevision: HEAD
