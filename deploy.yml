@@ -21,8 +21,4 @@ spec:
     automated:
       selfHeal: true
       prune: true
-
-  containers:
-   - name: webserver
-     image: nginx
 ---
