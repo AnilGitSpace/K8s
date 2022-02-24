@@ -1,19 +1,16 @@
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: nginx-pod
-  labels:
-    author: Anil
-    type: Proxy
+  name: guestbook
+  namespace: argocd
 spec:
-  containers:
-   - name: webserver
-     image: nginx
+  project: default
   source:
-   repoURL: https://github.com/AnilGitSpace/K8s.git
-   targetRevision: HEAD
-  destination: 
-   server: https://kubernetes.default.svc
-   namespace: myapp
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    targetRevision: HEAD
+    path: guestbook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: guestbook
 ---
