@@ -1,24 +1,26 @@
 ---
 apiVersion: v1
-kind: Application
+kind: Pod
 metadata:
-  name: NGINX-App
+  name: nginx-pod
   labels:
-   autor: Anil
-   name: Proxy
+    author: Anil
+    type: Proxy
 spec:
-  source:
+ source:
     repoURL: https://github.com/AnilGitSpace/K8s.git
     targetRevision: HEAD
  destination:
     server: https://kubernetes.default.svc
     namespace: myapp
+ containers:
+   - name: webserver
+     image: nginx
+syncPolicy:
+ syncOptions:
+   - CreateNamespace=true
 
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-
-    automated:
-      selfHeal: true
-      prune: true
----
+automated:
+ selfHeal: true
+ prune: true
+--
