@@ -1,19 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+---
+apiVersion: v1
+kind: Pod
 metadata:
-  name: myapp
+  name: nginx-pod
+  labels:
+    author: Anil
+    type: Proxy
 spec:
-  selector:
-    matchLabels:
-      app: myapp
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        app: myapp
-    spec:
-      containers:
-      - name: myapp
-        image: nginx
-        ports:
-        - containerPort: 8080
+  containers:
+   - name: webserver
+     image: nginx
+  source:
+   repoURL: https://gitlab.com/nanuchi/argocd-app-config.git
+   targetRevision: HEAD
+   path: dev
+  destination: 
+   server: https://kubernetes.default.svc
+   namespace: myapp
+
+--
